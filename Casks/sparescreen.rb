@@ -8,7 +8,7 @@ cask "sparescreen" do
   desc "Use a tablet as a wireless second screen for your Mac"
   homepage "https://getsparescreen.com"
 
-  depends_on macos: ">= :ventura"
+  depends_on macos: :ventura
 
   app "SpareScreen.app"
 
