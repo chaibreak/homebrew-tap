@@ -17,6 +17,7 @@ cask "sparescreen" do
   postflight_steps do
     run "/usr/bin/xattr", args: ["-dr", "com.apple.quarantine", "{{appdir}}/SpareScreen.app"]
     # Opening is a nicety: if it fails (e.g. during an upgrade), it must not roll back the install.
+    run "/bin/sleep", args: ["1"], must_succeed: false # let macOS register the new copy first
     run "/usr/bin/open", args: ["{{appdir}}/SpareScreen.app"], must_succeed: false
   end
 
