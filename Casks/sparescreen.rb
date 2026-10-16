@@ -13,17 +13,15 @@ cask "sparescreen" do
   app "SpareScreen.app"
 
   # Not notarized (no paid Apple Developer ID yet): clear the download quarantine so it opens without the Gatekeeper
-  # "Not Opened" block. Same approach as Castbar's tap.
+  # "Not Opened" block. Same approach as Castbar's tap. (Opening the app can't happen here: Homebrew 7 runs these
+  # steps in a sandbox where `open` fails, so the website's install command ends with `&& open -a SpareScreen`.)
   postflight_steps do
     run "/usr/bin/xattr", args: ["-dr", "com.apple.quarantine", "{{appdir}}/SpareScreen.app"]
-    # Opening is a nicety: if it fails (e.g. during an upgrade), it must not roll back the install.
-    run "/bin/sleep", args: ["1"], must_succeed: false # let macOS register the new copy first
-    run "/usr/bin/open", args: ["{{appdir}}/SpareScreen.app"], must_succeed: false
   end
 
   uninstall quit: "io.github.sparescreen.mac"
 
   zap trash: "~/Library/Preferences/io.github.sparescreen.mac.plist"
 
-  caveats "SpareScreen opens in the menu bar. Next time, start it from Applications or with: open -a SpareScreen"
+  caveats "Start SpareScreen from Applications, or with: open -a SpareScreen"
 end
