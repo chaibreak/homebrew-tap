@@ -1,7 +1,7 @@
 # Homebrew cask for SpareScreen. build.sh release fills in the @...@ values and writes dist/sparescreen.rb.
 cask "sparescreen" do
-  version "1.0.3"
-  sha256 "2241cb0c77b2240eab932c6c463dc11d39ffd87f6bf06da4301f457495851b6e"
+  version "1.0.4"
+  sha256 "7a591b12c1752ac9e86a0c71bde4c62edc599776ce61efa9a2df6efc48abb0c6"
 
   url "https://github.com/chaibreak/sparescreen/releases/download/v#{version}/SpareScreen-#{version}.zip"
   name "SpareScreen"
