@@ -16,7 +16,8 @@ cask "sparescreen" do
   # "Not Opened" block. Same approach as Castbar's tap.
   postflight_steps do
     run "/usr/bin/xattr", args: ["-dr", "com.apple.quarantine", "{{appdir}}/SpareScreen.app"]
-    run "/usr/bin/open", args: ["{{appdir}}/SpareScreen.app"]
+    # Opening is a nicety: if it fails (e.g. during an upgrade), it must not roll back the install.
+    run "/usr/bin/open", args: ["{{appdir}}/SpareScreen.app"], must_succeed: false
   end
 
   uninstall quit: "io.github.sparescreen.mac"
